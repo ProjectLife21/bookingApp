@@ -1,0 +1,12 @@
+export { default as AddHotePage } from "./AddHotelPage";
+export { default as BookingPage } from "./BookingPage";
+export { default as DetailHotelPage } from "./DetailHotePage";
+export { default as EditHotelPage } from "./EditHotelPage";
+export { default as HomePage } from "./HomePage";
+export { default as MyBookingPage } from "./MyBookingPage";
+export { default as MyHotelsPage } from "./MyHotelsPage";
+export { default as RegisterPage } from "./RegisterPage";
+export { default as SearchPage } from "./SearchPage";
+export { default as SignInPage } from "./SignInPage";
+export { default as ErrorPage } from "./ErrorPage";
+export { default as ProtectedRoute } from "./ProtectedRoute";
