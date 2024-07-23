@@ -1,10 +1,15 @@
-import express, { Request, Response, urlencoded } from "express";
+import express, { NextFunction, Request, Response, urlencoded } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 dotenv.config();
 
 // db
 import { connectDB } from "./db/connectDB";
+
+// routes
+import { authRouter } from "./routes/authRoute";
+
+import { errorHandleMiddleware } from "./middleware/errorHandlerMiddleware";
 
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -15,9 +20,15 @@ app.use(express.json());
 app.use(urlencoded({ extended: true }));
 app.use(cors());
 
-app.get("/", (req: Request, res: Response) => {
-  res.status(200).json({ msg: "Backend setup wit Express and TS" });
+// API
+app.use("/api/v1/auth", authRouter);
+
+app.use("*", (req: Request, res: Response, next: NextFunction) => {
+  res.status(404).json({ msg: "Sorry can't find that!" });
+  next();
 });
+
+app.use(errorHandleMiddleware);
 
 const startServer = async () => {
   try {
@@ -30,6 +41,7 @@ const startServer = async () => {
     });
   } catch (error) {
     console.log(error);
+    process.exit(1);
   }
 };
 
